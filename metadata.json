@@ -1,0 +1,5 @@
+{
+  "name": "Copy of Crypto Guard: Anti-Poisoning Visualizer",
+  "description": "A sophisticated web-based security tool designed to combat Address Poisoning and Clipboard Hijacking by generating unique visual fingerprints and highlighting critical address segments.",
+  "requestFramePermissions": []
+}
