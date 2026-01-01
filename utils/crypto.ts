@@ -11,11 +11,18 @@ export async function sha256(message: string): Promise<string> {
 }
 
 export function detectNetwork(address: string): string {
-  if (/^0x[a-fA-F0-9]{40}$/.test(address)) return 'Ethereum / EVM';
-  if (/^[13][a-km-zA-HJ-NP-Z1-9]{25,34}$/.test(address)) return 'Bitcoin (Legacy)';
-  if (/^bc1[ac-hj-np-z02-9]{11,71}$/.test(address)) return 'Bitcoin (SegWit)';
-  if (/^[1-9A-HJ-NP-Za-km-z]{32,44}$/.test(address)) return 'Solana';
+  const trimmed = address.trim();
+  if (/^0x[a-fA-F0-9]{40}$/.test(trimmed)) return 'Ethereum / EVM';
+  if (/^[13][a-km-zA-HJ-NP-Z1-9]{25,34}$/.test(trimmed)) return 'Bitcoin (Legacy)';
+  if (/^bc1[ac-hj-np-z02-9]{11,71}$/.test(trimmed)) return 'Bitcoin (SegWit)';
+  if (/^[1-9A-HJ-NP-Za-km-z]{32,44}$/.test(trimmed)) return 'Solana';
   return 'Unknown / Generic';
+}
+
+export function isValidAddress(address: string): boolean {
+  const network = detectNetwork(address);
+  if (network === 'Unknown / Generic') return address.length >= 26 && address.length <= 75;
+  return true;
 }
 
 export function splitAddress(address: string) {

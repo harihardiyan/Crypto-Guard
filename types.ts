@@ -8,6 +8,7 @@ export interface AddressCheck {
   middle: string;
   suffix: string;
   fingerprint: string;
+  network: string;
 }
 
 export enum NetworkType {
